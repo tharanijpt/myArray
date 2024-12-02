@@ -15,6 +15,26 @@ void Display(struct Array arr){
     printf("\n");
 }
 
+void swap(int* x,int* y){
+    int tmp = *x;
+    *x = *y;
+    *y = tmp;
+}
+
+
+int LinearSearch(struct Array *arr,int target){
+    for(int i=0;i<arr->length;i++){
+        if(arr->A[i]==target){
+            //transposition
+            if(i>0)
+                swap(&arr->A[i],&arr->A[i-1]);
+            return i-1;
+        }
+        return i;
+    }
+    return -1;
+}
+
 void Insert(struct Array *arr,int index,int value){
     if(index>=0 && index <= arr->length && arr->length < arr->size){
         for(int i=arr->length;i>index;i--){
@@ -37,13 +57,17 @@ void Pop(struct Array *arr){
         arr->length--;
 }
 
-void Delete(struct Array *arr,int index){
+int Delete(struct Array *arr,int index){
+    int value = 0;
     if(index >= 0 && index < arr->length){
+    value = arr->A[index];
         for(int i=index;i<arr->length-1;i++){
             arr->A[i] = arr->A[i+1];
         }
         arr->length--;
+        return value;
     }
+    return -1;
 }
 
 int main(){
