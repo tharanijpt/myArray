@@ -13,7 +13,6 @@ void Display(struct Array arr){
         printf("%d ",arr.A[i]);
     }
     printf("\n");
-
 }
 
 void Insert(struct Array *arr,int index,int value){
@@ -33,9 +32,18 @@ void Add(struct Array *arr,int value){
     }
 }
 
-void Delete(struct Array *arr){
+void Pop(struct Array *arr){
     if(arr->length != 0)
         arr->length--;
+}
+
+void Delete(struct Array *arr,int index){
+    if(index >= 0 && index < arr->length){
+        for(int i=index;i<arr->length-1;i++){
+            arr->A[i] = arr->A[i+1];
+        }
+        arr->length--;
+    }
 }
 
 int main(){
@@ -53,7 +61,7 @@ int main(){
 
     arr.A = (int *)malloc(arr_size * sizeof(int));
     arr.size = arr_size;
-    
+
     for(int i=0;i<ele_need;i++){
         printf("Enter A[%d]=",i);
         scanf("%d",&arr.A[i]);
