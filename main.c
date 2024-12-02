@@ -14,6 +14,16 @@ void Display(struct Array arr){
     }
 }
 
+void Insert(struct Array arr,int index,int value){
+    if(arr.length < arr.size){
+        for(int i=arr.length;i>index;i--){
+            arr.A[i] = arr.A[i-1];
+        }
+        arr.A[index] = value;
+        arr.length++;
+    }
+}
+
 int main(){
     struct Array arr;
     int arr_size = 0;
@@ -31,6 +41,11 @@ int main(){
     }
 
     arr.length = ele_need;
+    Display(arr);
+    printf("enter to insert :");
+    int index,value;
+    scanf("%d %d",index,value);
+    Insert(arr,index,value);
     Display(arr);
     return 0;
 }
