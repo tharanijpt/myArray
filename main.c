@@ -12,16 +12,30 @@ void Display(struct Array arr){
     for (int i=0;i<n;i++){
         printf("%d ",arr.A[i]);
     }
+    printf("\n");
+
 }
 
-void Insert(struct Array arr,int index,int value){
-    if(arr.length < arr.size){
-        for(int i=arr.length;i>index;i--){
-            arr.A[i] = arr.A[i-1];
+void Insert(struct Array *arr,int index,int value){
+    if(index>=0 && index <= arr->length && arr->length < arr->size){
+        for(int i=arr->length;i>index;i--){
+            arr->A[i] = arr->A[i-1];
         }
-        arr.A[index] = value;
-        arr.length++;
+        arr->A[index] = value;
+        arr->length++;
     }
+}
+
+void Add(struct Array *arr,int value){
+    if(arr->length < arr-> size){
+        arr->A[arr->length] = value;
+        arr->length++;
+    }
+}
+
+void Delete(struct Array *arr){
+    if(arr->length != 0)
+        arr->length--;
 }
 
 int main(){
@@ -32,9 +46,14 @@ int main(){
     scanf("%d",&arr_size);
     printf("Enter the total elements:");
     scanf("%d",&ele_need);
+    if(ele_need>arr_size){
+        printf("Number of elements can't exceed array size");
+        return -1;
+    }
 
     arr.A = (int *)malloc(arr_size * sizeof(int));
-
+    arr.size = arr_size;
+    
     for(int i=0;i<ele_need;i++){
         printf("Enter A[%d]=",i);
         scanf("%d",&arr.A[i]);
@@ -44,8 +63,9 @@ int main(){
     Display(arr);
     printf("enter to insert :");
     int index,value;
-    scanf("%d %d",index,value);
-    Insert(arr,index,value);
+    scanf("%d %d",&index,&value);
+    Insert(&arr,index,value);
     Display(arr);
+    free(arr.A);
     return 0;
 }
