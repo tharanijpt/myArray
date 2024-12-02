@@ -7,6 +7,13 @@ struct Array{
     int length;
 };
 
+void Display(struct Array arr){
+    int n = arr.length;
+    for (int i=0;i<n;i++){
+        printf("%d ",arr.A[i]);
+    }
+}
+
 int main(){
     struct Array arr;
     int arr_size = 0;
@@ -24,6 +31,6 @@ int main(){
     }
 
     arr.length = ele_need;
-
+    Display(arr);
     return 0;
 }
